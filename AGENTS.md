@@ -23,6 +23,8 @@ Commands are documented in `package.json` scripts. The important ones:
 
 ### Non-obvious caveats
 
+- The dev server may show a `TypeError: Cannot read properties of null (reading 'useContext')` from dnd-kit on the very first page load after starting. A page refresh resolves it. This is a known SSR hydration timing issue in dev mode and does not affect production builds.
+
 - Playwright is configured for chromium, firefox, and webkit, but only Chromium is installed in Cloud environments. Always pass `--project=chromium` when running E2E tests.
 - The `playwright.config.ts` reuses the existing dev server when not in CI (`reuseExistingServer: true`). If you already have `npm run dev` running, Playwright will use it.
 - Husky git hooks run `npm run lint && npm run typecheck` on pre-commit and `commitlint` on commit-msg. Commit messages must follow [Conventional Commits](https://www.conventionalcommits.org/) format (e.g., `feat: ...`, `fix: ...`, `chore: ...`).
